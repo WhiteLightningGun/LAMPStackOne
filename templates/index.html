@@ -1,2 +1,11 @@
-<h1>Hello world</h1>
-<p>I am here</p>
+<!DOCTYPE html>
+<header>
+  <title>Flask Page One</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</header>
+<body>
+  <h1>Hello worlds</h1>
+  <p class="red-text" id="switchme">I am here</p>
+  <p>right here</p>
+  <script src="{{ url_for('static', filename='script1.js') }}"></script>
+</body>
