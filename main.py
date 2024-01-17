@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
-from tools import queries
+from database import queries
 
 load_dotenv()
 
