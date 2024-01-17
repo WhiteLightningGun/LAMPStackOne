@@ -1,0 +1,5 @@
+<ul>
+  {% for tuple in entries %}
+  <li>{{ tuple[1] }}: {{ tuple[2] | done }}</li>
+  {% endfor %}
+</ul>
