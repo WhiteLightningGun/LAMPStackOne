@@ -7,5 +7,11 @@
   <h1 class="red-text" id="switchme">Hello worlds</h1>
   <p>I am here</p>
   <p>right here</p>
+  <br />
+  <ul>
+    {% for tuple in entries %}
+    <li>{{ tuple[1] }}: {{ tuple[2] | done }}</li>
+    {% endfor %}
+  </ul>
   <script src="{{ url_for('static', filename='script1.js') }}"></script>
 </body>
