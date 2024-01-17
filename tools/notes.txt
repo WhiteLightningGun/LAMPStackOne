@@ -1,1 +1,1 @@
-run new_db.py to make a basic SQLite database unpopulated with any data.
+Run new_db.py to make a basic SQLite database unpopulated with any data.
