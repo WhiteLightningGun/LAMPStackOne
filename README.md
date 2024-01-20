@@ -8,7 +8,7 @@ The go command is: flask run
 
 You will need to set local environment variables in a .env file. For the moment it need only contain: "FLASK_APP=main.py"
 
-To activate the local environment on Windows: .\venv\Scripts\activate  
+To activate the local Python environment on Windows: .\venv\Scripts\activate  
 or Unix: source venv/bin/activate
 
 Installing for the first time?
