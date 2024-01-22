@@ -1,4 +1,5 @@
 # .gitignore
+react-client/node_modules
 
 # Python cache files
 __pycache__/

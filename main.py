@@ -1,10 +1,13 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
 from database import queries
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
+# This will enable CORS for all routes from localhost:8000
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
 @app.route('/')
