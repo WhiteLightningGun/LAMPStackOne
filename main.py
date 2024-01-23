@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 from database import queries
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 load_dotenv()
 
@@ -24,11 +24,6 @@ def IsItDoneYet(input):
         return "Not Done"
     else:
         return "In Progress..."
-
-
-@app.route('/api/hello')
-def hello_world():
-    return 'Hello World from the Flask API!'
 
 
 @app.route('/api/entries')

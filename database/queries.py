@@ -30,7 +30,7 @@ def GetAllEntries():
 
 
 def InsertNewEntry(Todo, Done):
-    NextID = GetAllEntries()[-1][0] + 1
+    NextID = GetNextRowId()
     sqlTodoInsert = f'''INSERT INTO TodoEntries (ID, Todo, Done) VALUES ('{NextID}', '{Todo}', '{Done}')'''
     EditDB(sqlTodoInsert)
 
@@ -46,3 +46,11 @@ def MarkTodoEntry(ID, code):
 def DeleteTodoEntry(ID):
     sqlTodoDelete = f'''DELETE FROM TodoEntries WHERE ID = '{ID}' '''
     EditDB(sqlTodoDelete)
+
+
+def GetNextRowId():
+    result = QueryDB('''SELECT * FROM TodoEntries''')
+    if not result:
+        return 0
+    else:
+        return result[-1][0] + 1

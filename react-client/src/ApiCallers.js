@@ -46,16 +46,3 @@ async function PostDelete(todoID) {
 }
 
 export { GetHello, GetEntries, PostTodo, PostDelete };
-
-/*
-
-function GetHello() {
-  return fetch(`${window.location.origin}/api/hello`)
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
-}
-
-
-*/
