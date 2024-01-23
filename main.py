@@ -26,5 +26,16 @@ def IsItDoneYet(input):
         return "In Progress..."
 
 
+@app.route('/api/hello')
+def hello_world():
+    return 'Hello World from the Flask API!'
+
+
+@app.route('/api/entries')
+def get_all_entries():
+    entries = queries.GetAllEntries()
+    return {"entries": entries}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
