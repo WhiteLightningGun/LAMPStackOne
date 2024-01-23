@@ -9,8 +9,9 @@ load_dotenv()
 
 app = Flask(__name__, static_folder='react-client/build')
 
-socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+socketio = SocketIO(app)
 
+# cors_allowed_origins="http://localhost:3000"
 # This will enable CORS for all routes from localhost
 CORS(app, origins=["http://localhost:3000", "localhost/:1"])
 

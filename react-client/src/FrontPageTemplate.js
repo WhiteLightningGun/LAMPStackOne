@@ -10,6 +10,7 @@ function FrontPageTemplate() {
     GetEntries().then((data) => {
       setTodoList(data.entries);
     });
+    console.log(`using serverUrl: ${serverUrl}`);
     const socket = io(serverUrl);
     socket.on("database_updated", (data) => {
       console.log("socket io reports database updated --");
