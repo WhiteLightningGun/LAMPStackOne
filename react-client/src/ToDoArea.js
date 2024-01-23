@@ -1,10 +1,12 @@
-function ToDoArea(todoProp) {
+import React from "react";
+
+function ToDoArea({ todoProp, removeTodo }) {
   const handleDeleteClick = () => {
-    console.log(`delete clicked.. ${todoProp.todoProp[0]}`);
+    removeTodo(todoProp[0]);
   };
   return (
-    <li className="list-group-item">
-      {todoProp.todoProp[1]}{" "}
+    <li className="list-group-item fs-4">
+      {todoProp[1]}{" "}
       <button
         className="btn btn-sm btn-danger float-end"
         onClick={handleDeleteClick}

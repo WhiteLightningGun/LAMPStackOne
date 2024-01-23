@@ -41,3 +41,8 @@ def MarkTodoEntry(ID, code):
         return
     sqlTodoMark = f'''UPDATE TodoEntries SET Done = '{code}' WHERE ID = '{ID}' '''
     EditDB(sqlTodoMark)
+
+
+def DeleteTodoEntry(ID):
+    sqlTodoDelete = f'''DELETE FROM TodoEntries WHERE ID = '{ID}' '''
+    EditDB(sqlTodoDelete)
