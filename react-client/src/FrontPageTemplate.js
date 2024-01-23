@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { GetEntries, PostDelete } from "./ApiCallers";
+import io from "socket.io-client";
+import { GetEntries, PostDelete, serverUrl } from "./ApiCallers";
 import ToDoArea from "./ToDoArea";
 import ToDoInput from "./ToDoInput";
 
@@ -9,6 +10,13 @@ function FrontPageTemplate() {
     GetEntries().then((data) => {
       setTodoList(data.entries);
     });
+    const socket = io(serverUrl);
+    socket.on("database_updated", (data) => {
+      console.log("socket io reports database updated --");
+      console.log(data);
+      setTodoList(data.entries);
+    });
+    return () => socket.disconnect();
   }, []);
 
   const removeToDo = async (id) => {
@@ -17,23 +25,17 @@ function FrontPageTemplate() {
     const res = await PostDelete(id);
     if (res.message === "New todo deleted") {
       alert("Successfully removed todo");
-      refreshToDos();
     } else {
       alert("Failed to add todo");
     }
   };
 
-  const refreshToDos = () => {
-    GetEntries().then((data) => {
-      setTodoList(data.entries);
-    });
-  };
   return (
     <div className="App">
       <div>
         <div className="container">
           <h1 className="my-3">Todo List</h1>
-          <ToDoInput refreshToDos={refreshToDos} />
+          <ToDoInput />
           <ul className="list-group">
             {todoList.map((todo) => (
               <ToDoArea key={todo[0]} todoProp={todo} removeTodo={removeToDo} />

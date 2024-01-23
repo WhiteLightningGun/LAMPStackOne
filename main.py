@@ -1,19 +1,27 @@
-from flask import Flask, render_template, request, jsonify
+import os
+from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask_socketio import SocketIO, send, emit
 from dotenv import load_dotenv
 from database import queries
 from flask_cors import CORS
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='react-client/build')
+
+socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+
 # This will enable CORS for all routes from localhost
 CORS(app, origins=["http://localhost:3000", "localhost/:1"])
 
 
-@app.route('/')
-def home():
-    entries = queries.GetAllEntries()
-    return render_template('index.html', entries=entries)
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.template_filter('done')
@@ -39,6 +47,8 @@ def new_todo():
     if title is None:
         return jsonify({'error': 'No title provided'}), 400
     queries.InsertNewEntry(title, 0)
+    entries = queries.GetAllEntries()
+    socketio.emit('database_updated', {'entries': entries})
     return jsonify({'message': 'New todo created'}), 201
 
 
@@ -48,6 +58,8 @@ def delete_todo():
     if data is None:
         return jsonify({'error': 'error'}), 400
     queries.DeleteTodoEntry(data)
+    entries = queries.GetAllEntries()
+    socketio.emit('database_updated', {'entries': entries})
     return jsonify({'message': 'New todo deleted'}), 201
 
 

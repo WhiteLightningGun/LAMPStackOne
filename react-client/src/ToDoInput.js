@@ -2,20 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { PostTodo } from "./ApiCallers";
 
-function ToDoInput({ refreshToDos }) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+function ToDoInput() {
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
+    if (data.todoInput === "") {
+      return;
+    }
     const res = await PostTodo(data);
     if (res.message === "New todo created") {
       alert("Successfully added todo");
       reset();
-      refreshToDos();
     } else {
       alert("Failed to add todo");
     }

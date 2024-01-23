@@ -1,5 +1,5 @@
-let serverUrl = "http://127.0.0.1:5000";
-let currentUrl = window.location.href;
+export let serverUrl = "http://127.0.0.1:5000";
+//export let serverUrl = window.location.href;
 
 function GetHello() {
   return fetch(`${serverUrl}/api/hello`)
