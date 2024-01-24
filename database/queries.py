@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import re
 
 DB_PATH = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), 'TodoDatabase.db')
@@ -31,7 +32,8 @@ def GetAllEntries():
 
 def InsertNewEntry(Todo, Done):
     NextID = GetNextRowId()
-    sqlTodoInsert = f'''INSERT INTO TodoEntries (ID, Todo, Done) VALUES ('{NextID}', '{Todo}', '{Done}')'''
+    TodoNew = strip_problem_chars(Todo)
+    sqlTodoInsert = f'''INSERT INTO TodoEntries (ID, Todo, Done) VALUES ('{NextID}', '{TodoNew}', '{Done}')'''
     EditDB(sqlTodoInsert)
 
 
@@ -54,3 +56,6 @@ def GetNextRowId():
         return 0
     else:
         return result[-1][0] + 1
+
+def strip_problem_chars(s):
+    return re.sub(r'[^\w\s]', '', s)

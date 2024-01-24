@@ -15,7 +15,6 @@ socketio = SocketIO(app)
 # This will enable CORS for all routes from localhost
 CORS(app, origins=["http://localhost:3000", "localhost/:1"])
 
-
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
@@ -45,6 +44,7 @@ def get_all_entries():
 def new_todo():
     data = request.get_json()
     title = data.get('todoInput', None)
+    
     if title is None:
         return jsonify({'error': 'No title provided'}), 400
     queries.InsertNewEntry(title, 0)
