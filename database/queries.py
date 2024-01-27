@@ -1,6 +1,5 @@
 import sqlite3
 import os
-import re
 
 DB_PATH = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), 'TodoDatabase.db')
