@@ -1,4 +1,6 @@
-Hello from README, 16/01/2024
+Early February Update: The most intereting thing about this experiment was using websockets for instant upates for any computer in the network accessing this web-app. 
+
+It was gruelling but fun to get this app hosted on an Apache linux server with a cheap laptop and available on the local wi-fi network. I'll look back on this project in a few years and probably see it as a massive watershed moment for me. 
 
 Now we use Python3 flask for cross platform windows/linux convenience.
 
